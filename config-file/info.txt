@@ -1,0 +1,72 @@
+# update and upgrade raspberry pi
+
+sudo apt-get update
+sudo apt-get upgrade
+
+--- change the repo mirror if update/upgrade shows error in downloading
+
+sudo nano /etc/apt/sources.list
+
+
+
+# Raspberry pi access over hostname in place of ip address only
+
+ref: https://marc.it/assign-local-domain-for-raspberry-pi/
+sudo apt-get install avahi-daemon
+
+
+# Install LAMP server
+
+ref: https://randomnerdtutorials.com/raspberry-pi-apache-mysql-php-lamp-server/
+
+sudo apt-get install apache2 -y
+sudo apt-get install php -y
+sudo apt install mariadb-server php-mysql -y
+sudo service apache2 restart
+
+-- setup mysql user
+
+pi@raspberrypi:/var/www/html $ sudo mysql --user=root --password
+> create user admin@localhost identified by 'your_password';
+> grant all privileges on *.* to admin@localhost;
+> FLUSH PRIVILEGES;
+> exit;
+
+
+sudo apt install phpmyadmin -y
+
+
+
+# Fingerprint sensor library install
+
+sudo pip3 install pyfingerprint
+
+# Install MySql Connector
+
+sudo pip3 install mysql-connector-python
+
+NOTE: INSTALL ALL PACKAGES WITH PIP3 ONLY AND RUN THE SCRIPTS USING PYTHON3 ONLY
+
+
+# Give access to USB and TTY port to all applications
+
+sudo chmod 777 /dev/ttyS0
+sudo chmod 777 /dev/ttyUSB0
+
+# Use rc.local file and place it in raspberrypi's rc.local to initialize fingerprint scanner at the boot in Punch Mode.
+
+
+# Add following line in sudoers 
+
+sudo nano /etc/sudoers
+
+>>> www-data ALL=(ALL) NOPASSWD:ALL
+
+
+
+# while copy/delet/move files to a folder, permission error occurs then do:
+
+Menu -> Tools -> Run a Command in Current Folder
+
+sudo pcmanfm
+

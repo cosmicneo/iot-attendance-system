@@ -1,0 +1,29 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+#sudo bash -c 'python /home/pi/startblynk.py > /home/pi/startblynk.log 2>&1' &
+sudo bash -c 'python /home/pi/Desktop/search.py > /home/pi/Desktop/search.log 2>&1' &
+#sudo python /home/pi/Desktop/rf.py &
+#sudo chmod 777 /dev/ttyS0
+#sudo chmod 777 /dev/ttyUSB0
+#python /home/pi/Desktop/search.py
+#sudo bash -c 'chmod 777 /dev/ttyS0 > /home/pi/Desktop/startblynk.log 2>&1'
+sudo bash -c 'python /home/pi/Desktop/sound.py > /home/pi/Desktop/sound.log 2>&1' &
+exit 0
+
